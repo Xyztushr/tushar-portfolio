@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tushar Vishwakarma — MIS Analyst</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://img.icons8.com/fluency/48/data-in-both-directions.png" type="image/png">
+
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --card: #0f1720;
+      --muted: #9aa7b3;
+      --accent-a: #7c5cff;
+      --accent-b: #00d4ff;
+      --neon-glow: 0 6px 22px rgba(124,92,255,0.18), 0 2px 8px rgba(0,212,255,0.08);
+      --neon-text-shadow: 0 2px 10px rgba(124,92,255,0.12);
+      --success: #2dd4bf;
+      --text: #e6eef6;
+      --card-dim: rgba(255,255,255,0.03);
+      --max-width: 1080px;
+      --trans: 300ms;
+      --link-color: #00d4ff;
+    }
+
+    /* Light (plain) theme */
+    :root.light{
+      --bg: #ffffff;
+      --card: #ffffff;
+      --muted: #4b5563;
+      --accent-a: #4f46e5;
+      --accent-b: #06b6d4;
+      --neon-glow: none;
+      --neon-text-shadow: none;
+      --text: #071026;
+      --card-dim: rgba(2,6,23,0.03);
+      --link-color: #2563eb;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+      padding: 28px 18px;
+      display:flex;
+      justify-content:center;
+      transition: background var(--trans) ease, color var(--trans) ease;
+    }
+
+    .container{ width:100%; max-width:var(--max-width); }
+
+    /* Header/Nav */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:22px;
+      flex-wrap:wrap;
+    }
+    .title h1{ margin:0; font-size:26px; font-weight:800; text-transform:capitalize; }
+    .title p{ margin:6px 0 0 0; color:var(--muted); font-size:13px; }
+
+    .nav{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .navlinks{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding:4px; border-radius:10px; }
+    .navlinks a{
+      color:var(--muted); text-decoration:none; font-size:14px; padding:8px 10px; border-radius:8px;
+      transition: color 200ms ease, background 200ms ease, text-shadow 200ms ease;
+    }
+    .navlinks a:hover{ color:var(--accent-b); background: rgba(255,255,255,0.02); text-shadow: var(--neon-text-shadow); }
+
+    .badges{ display:flex; gap:8px; align-items:center; }
+    .badge{
+      font-size:12px; padding:8px 12px; border-radius:999px; font-weight:700; display:inline-flex; align-items:center; gap:8px;
+      letter-spacing:0.3px; border:1px solid var(--card-dim); white-space:nowrap; transition: box-shadow 240ms ease, transform 240ms ease;
+    }
+    .badge.open{ background: linear-gradient(90deg,var(--success), #10b981); color:#012018; box-shadow: var(--neon-glow); }
+    .badge.free{ background: linear-gradient(90deg,var(--accent-a), #8b5cf6); color:white; box-shadow: var(--neon-glow); }
+
+    .theme-toggle{
+      display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+      padding:8px; border-radius:10px; border:1px solid var(--card-dim); background:transparent;
+      color:var(--muted); font-weight:600; transition: box-shadow var(--trans) ease;
+    }
+    .theme-toggle:hover{ box-shadow: var(--neon-glow); color:var(--accent-b); }
+
+    /* Hero / Layout */
+    .hero{ display:grid; grid-template-columns: 1fr 360px; gap:24px; align-items:start; }
+    @media (max-width:920px){ .hero{ grid-template-columns:1fr; } }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--card-dim);
+      padding:18px; border-radius:14px; box-shadow: 0 10px 30px rgba(2,6,23,0.45);
+      transition: transform var(--trans) ease, box-shadow var(--trans) ease, background var(--trans) ease;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 18px 40px rgba(2,6,23,0.48); }
+
+    .intro h2{ margin:0 0 8px 0; font-size:20px; transition: text-shadow var(--trans) ease; }
+    :root:not(.light) .intro h2{ text-shadow: var(--neon-text-shadow); }
+
+    .intro p{ margin:0; color:var(--muted); line-height:1.6; }
+
+    .cta{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:10px;
+      text-decoration:none; font-weight:700; font-size:14px; border:1px solid var(--card-dim);
+      color:inherit; background:transparent; transition: box-shadow 220ms ease, transform 220ms ease, background 220ms ease;
+    }
+    .btn.primary{ background: linear-gradient(90deg,var(--accent-a), var(--accent-b)); color: #021020; border:none; box-shadow: var(--neon-glow); }
+    .btn.primary:hover{ transform: translateY(-4px); }
+    .btn.ghost{ background:transparent; }
+
+    /* Profile / Quick facts */
+    .profile{ display:flex; gap:12px; align-items:center; }
+    .profile .photo{
+      width:fit-content; height:130px; border-radius:14px; overflow:hidden; flex-shrink:0;
+      background: rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--card-dim); transition: box-shadow 260ms ease;
+    }
+    :root:not(.light) .profile .photo{ box-shadow: 0 8px 28px rgba(0,0,0,0.6), 0 6px 20px rgba(124,92,255,0.06); }
+    .profile .photo img{ width:100%; height:100%; object-fit:contain ; display:block; }
+    .profile .meta{ font-size:14px; color:var(--muted) }
+
+    /* Skills */
+    section{ margin-top:26px; }
+    h3.section-title{ margin:0 0 12px 0; font-size:16px; color:var(--text); transition:text-shadow var(--trans) ease; }
+    :root:not(.light) h3.section-title{ text-shadow: 0 4px 18px rgba(0,212,255,0.06); }
+
+    .skills-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; }
+    @media (max-width:920px){ .skills-grid{ grid-template-columns:repeat(2,1fr); } }
+
+    .skill-card{
+      display:flex; gap:10px; align-items:center; padding:10px; border-radius:12px;
+      border:1px solid var(--card-dim); background: var(--card);
+      transition: transform 260ms ease, box-shadow 260ms ease;
+    }
+    .skill-card:hover{ transform: translateY(-6px); box-shadow: 0 12px 26px rgba(0,0,0,0.32); }
+    .skill-card img{ width:44px; height:44px; object-fit:contain; border-radius:8px; background:transparent; transition: filter 200ms ease, box-shadow 200ms ease; }
+    :root:not(.light) .skill-card img{ box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 6px 18px rgba(0,212,255,0.04); filter: saturate(1.05); }
+
+    .skill-card .skill-name{ font-weight:700; font-size:14px; color:var(--text); }
+
+    /* Projects */
+    .projects-grid{ display:grid; gap:12px; grid-template-columns: repeat(1, 1fr); }
+    @media (min-width:820px){ .projects-grid{ grid-template-columns: repeat(2, 1fr); } }
+    .project{ padding:14px; border-radius:12px; border:1px solid var(--card-dim); background: var(--card); transition: transform 260ms ease, box-shadow 260ms ease; }
+    .project:hover{ transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,0.32); }
+    :root:not(.light) .project:hover{ box-shadow: 0 16px 36px rgba(0,212,255,0.16), 0 0 28px rgba(124,92,255,0.12); }
+
+    /* Contact */
+    .contact-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+
+    /* Social floating (images) */
+    .social-float{ position:fixed; bottom:22px; left:22px; display:flex; flex-direction:column; gap:10px; z-index:999; }
+    .social-float a{ width:44px; height:44px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center;
+      background:var(--card); border:1px solid var(--card-dim); text-decoration:none; color:var(--muted); transition: box-shadow 220ms ease, transform 220ms ease;
+    }
+    .social-float a img{ width:22px; height:22px; display:block; }
+    .social-float a:hover{ transform: translateY(-4px); box-shadow: var(--neon-glow); }
+
+    /* Footer */
+    footer{ margin-top:26px; text-align:center; color:var(--muted); font-size:13px; }
+
+    /* Loader overlay */
+    #loaderOverlay{
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:18px;
+      background: linear-gradient(180deg,#05060a,#071018); z-index:99999; transition:opacity 600ms ease, visibility 600ms ease;
+      opacity:1; visibility:visible;
+    }
+    #loaderOverlay.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+
+    .spinner{
+      width:78px; height:78px; border-radius:50%; border:7px solid rgba(255,255,255,0.06); border-top-color:var(--accent-b);
+      animation:spin 1s linear infinite; box-shadow:0 10px 30px rgba(6,12,30,0.6);
+    }
+    @keyframes spin{ to{ transform:rotate(360deg) } }
+    #loaderText{ color:var(--muted); font-weight:700; letter-spacing:0.6px; font-size:14px; }
+
+    /* Typewriter base */
+    .typewriter {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgba(255, 255, 255, 0.12);
+  padding-right: 6px;
+  min-width: fit-content; 
+  min-height: 5vh;/* 👈 fix width to fit longest phrase */
+}
+
+
+    /* Fade/slide */
+    .fade-up{ transform: translateY(12px); opacity:0; transition:transform 520ms cubic-bezier(.2,.9,.3,1), opacity 520ms ease; }
+    .fade-up.in{ transform:none; opacity:1; }
+
+    /* Responsive tweaks */
+    @media (max-width:520px){
+      body{ padding:18px 12px; }
+      .profile .photo{ width:fit-content; height:188px }
+      .hero{ gap:18px; }
+      .navlinks a{ padding:6px 8px; font-size:13px; }
+      .social-float{ left:auto; right:12px; bottom:12px; gap:8px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- LOADER (2.5 seconds) -->
+  <div id="loaderOverlay" role="status" aria-label="Loading screen">
+    <div class="spinner" aria-hidden="true"></div>
+    <div id="loaderText">Loading…</div>
+  </div>
+
+  <div class="container" id="mainContent" style="opacity:0; transform:translateY(8px); transition:opacity 600ms ease, transform 600ms ease;">
+    <header>
+      <div class="title">
+        <h1>Tushar <span style="opacity:0.95">Vishwakarma</span></h1>
+        <p>MIS Analyst | Excel | Power BI | Web Design</p>
+      </div>
+
+      <div class="nav" role="navigation" aria-label="Main navigation">
+        <nav class="navlinks" aria-label="Primary links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="badges" aria-hidden="true">
+            <div class="badge open">Open for Work</div>
+            <div class="badge free">Available for Freelance</div>
+          </div>
+
+          <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle light / dark">🌙</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO / INTRO -->
+    <main class="hero">
+      <div class="card intro fade-up" data-anim>
+        <h2><span id="typewriter" class="typewriter" aria-live="polite"></span></h2>
+        <p>
+          I’m a motivated MIS Analyst with 2 years of experience in data and operations management.
+          Skilled in Excel, Power BI, SQL and web design. I build dashboards, automate workflows,
+          and help teams make faster decisions. Currently open to full-time & freelance work.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="mailto:vktushar5@gmail.com">Email Me</a>
+          <a class="btn" href="tushar_re.pdf" download>Download Resume</a>
+          <a class="btn ghost" href="#projects">See Projects</a>
+        </div>
+      </div>
+
+      <aside class="card quick fade-up" data-anim>
+        <div class="profile">
+          <div class="photo" id="photoPlaceholder" title="Your photo goes here">
+            <!-- You can replace this img src with your real photo link -->
+            <img id="profilePhoto" src="tusharpfp.jpg" alt="Profile (replaceable)" />
+          </div>
+
+          <div class="meta">
+            <div style="font-weight:700">Tushar Vishwakarma</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">
+              Location: Bhopal, India<br>
+              Experience: 2 years • MIS / Dashboarding
+            </div>
+          </div>
+        </div>
+
+        <hr style="border:none;height:1px;margin:12px 0;background:var(--card-dim)">
+
+        <div style="font-size:14px;color:var(--muted)">
+          <div>📧 <a class="link" href="mailto:vktushar5@gmail.com" style="color:var(--link-color);text-decoration:none">vktushar5@gmail.com</a></div>
+          <div style="margin-top:8px">🧰 Tools: Excel, Power BI, SQL, Python (pandas)</div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- SKILLS -->
+    <section id="skills" class="fade-up" data-anim>
+      <h3 class="section-title">Skills</h3>
+      <div class="skills-grid" style="margin-top:10px">
+        <div class="skill-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Microsoft_Excel_2013-2019_logo.svg/1200px-Microsoft_Excel_2013-2019_logo.svg.png" alt="Excel icon" class="skill-icon">
+          <div class="skill-name">Excel (Advanced)</div>
+        </div>
+
+        <div class="skill-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/1200px-New_Power_BI_Logo.svg.png" alt="Power BI icon" class="skill-icon">
+          <div class="skill-name">Power BI</div>
+        </div>
+
+        <div class="skill-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL icon" class="skill-icon">
+          <div class="skill-name">SQL</div>
+        </div>
+
+        <div class="skill-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python icon" class="skill-icon">
+          <div class="skill-name">Python </div>
+        </div>
+
+        <div class="skill-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/12538/12538824.png" alt="Dashboard icon" class="skill-icon">
+          <div class="skill-name">Dashboarding</div>
+        </div>
+
+        <div class="skill-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="Web icon" class="skill-icon">
+          <div class="skill-name">Web Design (HTML/CSS)</div>
+        </div>
+
+        <div class="skill-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/18188/18188306.png" alt="Automation icon" class="skill-icon">
+          <div class="skill-name">Automation & Macros</div>
+        </div>
+
+        <div class="skill-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/7416/7416118.png" alt="ETL icon" class="skill-icon">
+          <div class="skill-name">Data Cleaning & ETL</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="fade-up" data-anim>
+      <h3 class="section-title">Projects</h3>
+      <div class="projects-grid" style="margin-top:12px">
+        <article class="project">
+          <strong>Sales Dashboard — Excel</strong>
+          <p style="color:var(--muted)">This project presents a dynamic Excel dashboard to track and analyze sales performance. It includes key metrics such as total revenue, sales growth, top products, and regional performance. Interactive charts and slicers make it easy to visualize trends and support data-driven decision-making.</p>
+        </article>
+
+        <article class="project">
+          <strong>Agency Performance Dashboard — Power Bi</strong>
+          <p style="color:var(--muted)">This project focuses on tracking and analyzing loan recovery performance for ICICI Bank. It helps monitor overdue accounts, collection status, and recovery trends using data-driven insights to improve efficiency and reduce default rates.</p>
+        </article>
+
+        <article class="project">
+          <strong>Python List-Making Automation Project</strong>
+          <p style="color:var(--muted)">This project automates the process of creating and managing lists using Python. It helps organize data efficiently by reading, sorting, and updating list items automatically, reducing manual effort and improving productivity.</p>
+        </article>
+
+        <article class="project">
+          <strong>Web Portfolio (This Site)</strong>
+          <p style="color:var(--muted)">Responsive single-page website built with HTML, CSS and lightweight JS — designed for hiring & freelance outreach.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="fade-up" data-anim>
+      <h3 class="section-title">Contact</h3>
+
+      <div class="card contact-row" style="margin-top:12px">
+        <div>
+          <p style="margin:0 0 6px 0; font-weight:700">Let's work together</p>
+          <p style="margin:0;color:var(--muted)">I’m open to full-time roles and freelance projects. Tell me about your needs — I'll reply quickly.</p>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="btn primary" href="mailto:vktushar5@gmail.com?subject=Opportunity%20for%20Tushar">Email Me</a>
+          <a class="btn" href="https://www.linkedin.com/in/tushar-vishwakarma-639347238" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="fade-up" data-anim>
+      Built with ♥ by Tushar — MIS Analyst • Neon dark & clean light themes • Edit this file to customize content.
+    </footer>
+  </div>
+
+  <!-- Social floating with images -->
+  <div class="social-float" aria-label="Social links">
+    <a href="https://www.linkedin.com/in/tushar-vishwakarma-639347238" target="_blank" title="LinkedIn">
+      <img src="https://img.icons8.com/fluency/48/linkedin.png" alt="LinkedIn">
+    </a>
+    <a href="https://github.com/Xyztushr" target="_blank" title="GitHub">
+      <img src="https://img.icons8.com/fluency/48/github.png" alt="GitHub">
+    </a>
+    <a href="mailto:vktushar5@gmail.com" title="Email">
+      <img src="https://img.icons8.com/fluency/48/new-post.png" alt="Email">
+    </a>
+  </div>
+
+  <script>
+    /* ===== Loader 2.5 seconds & fail-safe 10s ===== */
+    (function(){
+      const overlay = document.getElementById('loaderOverlay');
+      const main = document.getElementById('mainContent');
+
+      function revealMain(){
+        overlay.classList.add('hidden');
+        main.style.opacity = '1';
+        main.style.transform = 'translateY(0)';
+      }
+
+      window.addEventListener('load', ()=>{
+        // show loader exactly 2.5 seconds after load
+        setTimeout(revealMain, 2500);
+        // fail-safe in case load event delayed
+        setTimeout(()=>{ if(!overlay.classList.contains('hidden')) revealMain(); }, 10000);
+      });
+    })();
+
+    /* ===== IntersectionObserver for fade-up sections ===== */
+    (function(){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) e.target.classList.add('in');
+        });
+      }, { threshold: 0.14 });
+      document.querySelectorAll('[data-anim]').forEach(el=>obs.observe(el));
+    })();
+
+    /* ===== Theme toggle with persistence ===== */
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const stored = localStorage.getItem('site-theme');
+      if(stored === 'light') root.classList.add('light');
+      function updateButton(){ btn.textContent = root.classList.contains('light') ? '🌙' : '☀️'; btn.setAttribute('aria-pressed', String(root.classList.contains('light'))); }
+      updateButton();
+      btn.addEventListener('click', ()=>{
+        root.classList.toggle('light');
+        const isLight = root.classList.contains('light');
+        localStorage.setItem('site-theme', isLight ? 'light' : 'dark');
+        updateButton();
+      });
+    })();
+
+    /* ===== Smooth Typewriter (no flicker) ===== */
+    (function(){
+      const el = document.getElementById('typewriter');
+      const phrases = [
+        "MIS Analyst",
+        "Excel & Power BI Expert",
+        "Data Cleaning & ETL",
+        "Automation & Dashboards"
+      ];
+      let pIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      const TYPING_SPEED = 70;
+      const DELETING_SPEED = 40;
+      const PAUSE_AFTER = 1000;
+      const PAUSE_BEFORE = 300;
+
+      function tick(){
+        const full = phrases[pIndex];
+        if(!isDeleting){
+          // typing
+          charIndex++;
+          el.textContent = full.slice(0, charIndex);
+          if(charIndex === full.length){
+            // pause then start deleting
+            setTimeout(()=>{ isDeleting = true; tick(); }, PAUSE_AFTER);
+            return;
+          }
+          setTimeout(tick, TYPING_SPEED);
+        } else {
+          // deleting
+          charIndex--;
+          el.textContent = full.slice(0, charIndex);
+          if(charIndex === 0){
+            isDeleting = false;
+            pIndex = (pIndex + 1) % phrases.length;
+            setTimeout(tick, PAUSE_BEFORE);
+            return;
+          }
+          setTimeout(tick, DELETING_SPEED);
+        }
+      }
+
+      window.addEventListener('load', ()=> setTimeout(tick, 520));
+    })();
+
+    /* ===== Helpers (optional) ===== */
+    window.setProfilePhoto = function(url){
+      const img = document.getElementById('profilePhoto');
+      if(!img) return;
+      if(!url){ img.src=''; return; }
+      img.src = url;
+      img.onerror = ()=> console.warn('Profile photo failed to load');
+    };
+
+    window.setSkillIcon = function(searchText, url){
+      const cards = Array.from(document.querySelectorAll('.skill-card'));
+      for(const c of cards){
+        const name = (c.querySelector('.skill-name')?.textContent || '').toLowerCase();
+        if(name.includes(searchText.toLowerCase())){
+          const img = c.querySelector('img');
+          if(img) img.src = url;
+          return;
+        }
+      }
+    };
+  </script>
+</body>
+</html>
